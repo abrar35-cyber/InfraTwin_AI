@@ -77,11 +77,22 @@ with st.sidebar:
     st.markdown("**AI services**")
     status = get_service_status()
     st.caption("Groq text model")
-    st.success("Configured") if status["text"] else st.error("API key missing")
-    st.caption("Groq vision model")
-    st.success("Configured") if status["vision"] else st.warning("Check vision model")
-    st.caption("Speech transcription")
-    st.success("Available with Groq key") if status["text"] else st.warning("Needs API key")
+if status["text"]:
+    st.success("Configured")
+else:
+    st.error("API key missing")
+
+st.caption("Groq vision model")
+if status["vision"]:
+    st.success("Configured")
+else:
+    st.warning("Check vision model")
+
+st.caption("Speech transcription")
+if status["text"]:
+    st.success("Available with Groq key")
+else:
+    st.warning("Needs API key")
     st.divider()
     st.caption("Prototype decision-support software. Engineering findings require professional verification.")
 
